@@ -1,4 +1,5 @@
 import { Link } from "react-router"
+import Navbar from "../../components/navbar/Navbar"
 
 function SignIn() {
   return (
@@ -6,37 +7,7 @@ function SignIn() {
         <div className="absolute w-[calc(100%-20px)] min-h-[calc(100vh-20px)] h-[calc(100%-20px)] bg-[#060A23] -z-10 rounded-[20px]">
             <img src="/assets/images/backgrounds/background-glow.png" className="absolute bottom-0 transform -translate-x-1/2 left-1/2" alt="" />
         </div>
-        <nav className="flex items-center justify-between p-[30px]">
-            <div className="flex items-center gap-[60px]">
-                <img src="/assets/images/logos/logo.svg" className="flex shrink-0" alt="logo" />
-                <ul className="flex items-center gap-10">
-                    <li className="font-semibold transition-all duration-300 hover:text-[#662FFF] text-white">
-                        <Link to="#">Home</Link>
-                    </li>
-                    <li className="font-semibold transition-all duration-300 hover:text-[#662FFF] text-white">
-                        <Link to="pricing.html">Pricing</Link>
-                    </li>
-                    <li className="font-semibold transition-all duration-300 hover:text-[#662FFF] text-white">
-                        <Link to="#">Features</Link>
-                    </li>
-                    <li className="font-semibold transition-all duration-300 hover:text-[#662FFF] text-white">
-                        <Link to="#">Testimonials</Link>
-                    </li>
-                </ul>
-            </div>
-            <div className="flex items-center gap-3">
-                <Link to="signin.html" >
-                    <div className="flex items-center gap-3 w-fit rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
-                        <span className="font-semibold text-white">My Dashboard</span>
-                    </div>
-                </Link>           
-                <Link to="signup.html" >
-                    <div className="flex items-center gap-3 w-fit rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#662FFF] border-[#8661EE] shadow-[-10px_-6px_10px_0_#7F33FF_inset]">
-                        <span className="font-semibold text-white">Sign Up</span>
-                    </div>
-                </Link>
-            </div>
-        </nav>
+        <Navbar />
         <form action="pricing.html" className="flex flex-col w-[400px] h-fit rounded-[20px] border border-[#262A56] p-[30px] gap-[30px] bg-[#080A2A] m-auto">
             <div>
                 <h1 className="font-bold text-[26px] leading-[39px] text-white">Welcome Back!</h1>
@@ -53,7 +24,7 @@ function SignIn() {
                     <input type="password" name="password" id="password" className="appearance-none outline-none !bg-transparent w-full font-semibold text-white placeholder:font-normal placeholder:text-[#6B6C7F]" placeholder="Type your secure password" />
                 </div>
                 <div className="flex justify-end mt-[10px]">
-                    <Link to="#" className="text-sm leading-[21px] text-[#662FFF] hover:underline">Forgot Password</Link>
+                    <Link to="/reset-password" className="text-sm leading-[21px] text-[#662FFF] hover:underline">Forgot Password</Link>
                 </div>
             </div>
             <hr className="border-[#262A56]" />
