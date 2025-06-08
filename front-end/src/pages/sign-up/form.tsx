@@ -1,5 +1,3 @@
-import React from 'react'
-
 function FormSignUp() {
   return (
     <form action="signin.html" className="flex flex-col w-[400px] h-fit rounded-[20px] border border-[#262A56] p-[30px] gap-[30px] bg-[#080A2A]">

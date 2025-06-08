@@ -1,7 +1,5 @@
 import FormSignUp from './form'
 import Navbar from '../../components/navbar/Navbar'
-import Pricing from '../pricing'
-
 function SignUp() {
   return (
     <div className="relative flex flex-col flex-1 p-[10px]">
