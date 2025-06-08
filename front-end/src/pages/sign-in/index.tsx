@@ -1,3 +1,5 @@
+import { Link } from "react-router"
+
 function SignIn() {
   return (
     <div className="relative flex flex-col flex-1 p-[10px]">
@@ -9,30 +11,30 @@ function SignIn() {
                 <img src="/assets/images/logos/logo.svg" className="flex shrink-0" alt="logo" />
                 <ul className="flex items-center gap-10">
                     <li className="font-semibold transition-all duration-300 hover:text-[#662FFF] text-white">
-                        <a href="#">Home</a>
+                        <Link to="#">Home</Link>
                     </li>
                     <li className="font-semibold transition-all duration-300 hover:text-[#662FFF] text-white">
-                        <a href="pricing.html">Pricing</a>
+                        <Link to="pricing.html">Pricing</Link>
                     </li>
                     <li className="font-semibold transition-all duration-300 hover:text-[#662FFF] text-white">
-                        <a href="#">Features</a>
+                        <Link to="#">Features</Link>
                     </li>
                     <li className="font-semibold transition-all duration-300 hover:text-[#662FFF] text-white">
-                        <a href="#">Testimonials</a>
+                        <Link to="#">Testimonials</Link>
                     </li>
                 </ul>
             </div>
             <div className="flex items-center gap-3">
-                <a href="signin.html" >
+                <Link to="signin.html" >
                     <div className="flex items-center gap-3 w-fit rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                         <span className="font-semibold text-white">My Dashboard</span>
                     </div>
-                </a>           
-                <a href="signup.html" >
+                </Link>           
+                <Link to="signup.html" >
                     <div className="flex items-center gap-3 w-fit rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#662FFF] border-[#8661EE] shadow-[-10px_-6px_10px_0_#7F33FF_inset]">
                         <span className="font-semibold text-white">Sign Up</span>
                     </div>
-                </a>
+                </Link>
             </div>
         </nav>
         <form action="pricing.html" className="flex flex-col w-[400px] h-fit rounded-[20px] border border-[#262A56] p-[30px] gap-[30px] bg-[#080A2A] m-auto">
@@ -51,7 +53,7 @@ function SignIn() {
                     <input type="password" name="password" id="password" className="appearance-none outline-none !bg-transparent w-full font-semibold text-white placeholder:font-normal placeholder:text-[#6B6C7F]" placeholder="Type your secure password" />
                 </div>
                 <div className="flex justify-end mt-[10px]">
-                    <a href="#" className="text-sm leading-[21px] text-[#662FFF] hover:underline">Forgot Password</a>
+                    <Link to="#" className="text-sm leading-[21px] text-[#662FFF] hover:underline">Forgot Password</Link>
                 </div>
             </div>
             <hr className="border-[#262A56]" />
