@@ -3,6 +3,7 @@ import Manager from "../pages/ManagerHome";
 import SignIn from "../pages/sign-in";
 import SignUp from "../pages/sign-up";
 import Pricing from "../pages/pricing";
+import SuccessCheckout from "../pages/SuccessCheckout";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
     {
       path: "/pricing",
       element: <Pricing />
+    },
+    {
+      path: "/success-checkout",
+      element: <SuccessCheckout />
     },
 ])
 
