@@ -1,5 +1,5 @@
 import FormSignUp from './form'
-import Navbar from '../../components/navbar/Navbar'
+import Navbar from '../../../components/Navbar'
 function SignUp() {
   return (
     <div className="relative flex flex-col flex-1 p-[10px]">
@@ -13,7 +13,6 @@ function SignUp() {
                 <h1 className="font-extrabold text-[46px] leading-[69px] text-white">Sign Up & Enhance <br />Employees Skills</h1>
                 <p className="text-lg leading-[32px] text-white">We delivery robust features to anyone <br  />unconditionally so they can grow bigger.</p>
             </div>
-
             {/* <Pricing /> */}
         </div>
     </div>
