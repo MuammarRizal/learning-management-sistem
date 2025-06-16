@@ -18,6 +18,7 @@ fileInput.addEventListener('change', function(event) {
     }
 });
 
+
 deletePreview.addEventListener('click', () => {
     preview.src = '#';
     preview.classList.toggle('hidden');
