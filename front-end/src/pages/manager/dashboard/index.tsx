@@ -4,11 +4,13 @@ import Stats from "./stats";
 
 function DashboardManager() {
   return (
-    <div className="grid grid-cols-2 gap-[30px]">
-        <Stats />
-        <LatestCourse />
-        <LatestStudent />
-    </div>
+    <>
+      <Stats />
+      <div className="grid grid-cols-2 gap-[30px]">
+          <LatestCourse />
+          <LatestStudent />
+      </div>
+    </>
   )
 }
 
