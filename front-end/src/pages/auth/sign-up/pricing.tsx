@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import Navbar from '../../components/navbar/Navbar'
+import Navbar from '../../../components/Navbar'
 
 function Pricing() {
   return (
