@@ -5,7 +5,8 @@ import SignUp from "../pages/auth/sign-up";
 import Pricing from "../pages/auth/sign-up/pricing";
 import SuccessCheckout from "../pages/SuccessCheckout";
 import LayoutDashboard from "../components/layout-dashboard";
-import DashboardManager from "../pages/manager/dashboard";
+import DashboardManagerPage from "../pages/manager/dashboard";
+import ManagerCoursePage from "../pages/manager/courses";
 
 const router = createBrowserRouter([
     {
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
       children: [
         {
           index: true,
-          element: <DashboardManager />
+          element: <DashboardManagerPage />
+        },
+        {
+          path: "/manager/courses",
+          element: <ManagerCoursePage />
         }
       ]
     },
