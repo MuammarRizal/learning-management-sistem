@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import CardComp from '../../../components/manager/courses/card'
 
 function ManagerCoursePage() {
@@ -9,16 +10,21 @@ function ManagerCoursePage() {
                 <p className="text-[#838C9D] mt-[1]">Give the best future for your great employees</p>
             </div>
             <div className="flex items-center gap-3">
-                <a href="#" className="w-fit rounded-full border border-[#060A23] p-[14px_20px] font-semibold text-nowrap">
+                <Link to="#" className="w-fit rounded-full border border-[#060A23] p-[14px_20px] font-semibold text-nowrap">
                     Import File
-                </a>
-                <a href="create-new-course.html" className="w-fit rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap">
+                </Link>
+                <Link to="/manager/courses/create" className="w-fit rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap">
                     New Course
-                </a>
+                </Link>
             </div>
         </header>
         <section id="CourseList" className="flex flex-col w-full rounded-[30px] p-[30px] gap-[30px] bg-[#F8FAFB]">
-            <CardComp />
+            <CardComp 
+                id={1} 
+                thumbnail='/assets/images/thumbnails/th-1.png'
+                name='Responsive Design Triclorem Lorem, ipsum dolor.'
+                totalStudents={1} 
+                categories='programming'/>
             {/* <div id="Pagination" className="flex items-center gap-3">
                 <button type="button" className="flex shrink-0 w-9 h-9 rounded-full items-center justify-center text-center transition-all duration-300 hover:bg-[#662FFF] hover:text-white hover:border-0 bg-[#662FFF] text-white">
                     <span className="font-semibold text-sm leading-[21px]">1</span>
