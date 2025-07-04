@@ -4,7 +4,7 @@ import CardComp from '../../../components/manager/courses/card'
 function ManagerCoursePage() {
   return (
     <>
-    <header className="flex items-center justify-between gap-[30px]">
+        <header className="flex items-center justify-between gap-[30px]">
             <div>
                 <h1 className="font-extrabold text-[28px] leading-[42px]">Manage Courses</h1>
                 <p className="text-[#838C9D] mt-[1]">Give the best future for your great employees</p>

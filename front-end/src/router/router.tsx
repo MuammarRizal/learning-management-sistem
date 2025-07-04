@@ -1,19 +1,20 @@
 import { createBrowserRouter } from "react-router";
-import Manager from "../pages/manager/dashboard";
+import ManagerPage from "../pages/manager/dashboard";
 import SignIn from "../pages/auth/sign-in";
 import SignUp from "../pages/auth/sign-up";
 import Pricing from "../pages/auth/sign-up/pricing";
-import SuccessCheckout from "../pages/SuccessCheckout";
+import SuccessCheckoutPage from "../pages/SuccessCheckout";
 import LayoutDashboard from "../components/layout-dashboard";
 import DashboardManagerPage from "../pages/manager/dashboard";
 import ManagerCoursePage from "../pages/manager/courses";
-import CreateCourses from "../pages/manager/create-courses";
-import CourseDetail from "../pages/manager/courses-detail";
+import CreateCoursePage from "../pages/manager/create-course";
+import CourseDetailPage from "../pages/manager/course-detail";
+import CourseContentCreatePage from "../pages/manager/course-content-create";
 
 const router = createBrowserRouter([
     {
       path: "/",
-      element: <Manager />
+      element: <ManagerPage />
     },
     {
       path: "/about",
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
     },
     {
       path: "/success-checkout",
-      element: <SuccessCheckout />
+      element: <SuccessCheckoutPage />
     },
 
     // Manager
@@ -42,12 +43,16 @@ const router = createBrowserRouter([
           element: <ManagerCoursePage />,
         },
         {
-          path: "/manager/courses/create",
-          element: <CreateCourses />
+          path: "/manager/course/create",
+          element: <CreateCoursePage />
         },
         {
-          path: "/manager/courses/:id",
-          element: <CourseDetail />
+          path: "/manager/course/:id",
+          element: <CourseDetailPage />
+        },
+        {
+          path: "/manager/courses/:id/create",
+          element: <CourseContentCreatePage />
         }
       ]
     },

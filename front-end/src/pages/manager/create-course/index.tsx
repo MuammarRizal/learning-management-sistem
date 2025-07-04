@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-function CreateCourses() {
+function CreateCoursePage() {
     const clickEvent = () => {
         const thumbnail = document.getElementById('thumbnail');
         if (thumbnail) {
@@ -83,4 +83,4 @@ function CreateCourses() {
     )
 }
 
-export default CreateCourses
+export default CreateCoursePage

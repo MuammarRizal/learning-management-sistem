@@ -3,7 +3,7 @@ import LatestCourse from "./latest-course";
 import LatestStudent from "./latest-student";
 import Stats from "./stats";
 
-function DashboardManager() {
+function DashboardManagerPage() {
   return (
     <div className="grid grid-cols-1 gap-[30px]">
         <Header />
@@ -14,4 +14,4 @@ function DashboardManager() {
   )
 }
 
-export default DashboardManager
+export default DashboardManagerPage

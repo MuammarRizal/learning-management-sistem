@@ -1,7 +1,7 @@
 import CourseContent from './course-content'
 import CourseInfo from './course-info'
 
-function CourseDetail() {
+function CourseDetailPage() {
   return (
     <>
         <div id="Breadcrumb" className="flex items-center gap-5 *:after:content-['/'] *:after:ml-5">
@@ -31,4 +31,4 @@ function CourseDetail() {
   )
 }
 
-export default CourseDetail
+export default CourseDetailPage
