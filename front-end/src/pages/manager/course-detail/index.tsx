@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import CourseContent from './course-content'
 import CourseInfo from './course-info'
 
@@ -17,12 +18,12 @@ function CourseDetailPage() {
                 </h1>
             </div>
             <div className="flex items-center gap-3">
-                <a href="#" className="w-fit rounded-full border border-[#060A23] p-[14px_20px] font-semibold text-nowrap">
+                <Link to="/" className="w-fit rounded-full border border-[#060A23] p-[14px_20px] font-semibold text-nowrap">
                     Edit Course
-                </a>
-                <a href="course-learning-video.html" className="w-fit rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap">
+                </Link>
+                <Link to="/manager/courses/1/preview" className="w-fit rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap">
                     Preview
-                </a>
+                </Link>
             </div>
         </header>
         <CourseInfo />
