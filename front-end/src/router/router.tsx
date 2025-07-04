@@ -8,6 +8,7 @@ import LayoutDashboard from "../components/layout-dashboard";
 import DashboardManagerPage from "../pages/manager/dashboard";
 import ManagerCoursePage from "../pages/manager/courses";
 import CreateCourses from "../pages/manager/create-courses";
+import CourseDetail from "../pages/manager/courses-detail";
 
 const router = createBrowserRouter([
     {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
         {
           path: "/manager/courses/create",
           element: <CreateCourses />
+        },
+        {
+          path: "/manager/courses/:id",
+          element: <CourseDetail />
         }
       ]
     },
