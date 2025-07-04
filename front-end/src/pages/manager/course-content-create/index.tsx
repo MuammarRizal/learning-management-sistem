@@ -78,31 +78,33 @@ function CourseContentCreatePage() {
                 {/* <div id="editor">
                 </div>*/}
                 <CKEditor
-                editor={ ClassicEditor }
-                config={ {
-                    toolbar: [
-                    'undo', 'redo', '|',
-                    'heading', '|', 'bold', 'italic', '|',
-                    'link', 'insertTable', 'mediaEmbed', '|',
-                    'bulletedList', 'numberedList', 'indent', 'outdent'
-                    ],
-                    plugins: [
-                    Bold,
-                    Essentials,
-                    Heading,
-                    Indent,
-                    IndentBlock,
-                    Italic,
-                    Link,
-                    List,
-                    MediaEmbed,
-                    Paragraph,
-                    Table,
-                    Undo
-                    ],
-                    initialData: '<h1>Hello from CKEditor 5!</h1>',
-                } }
+                    editor={ ClassicEditor }
+                    config={ {
+                        licenseKey: "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NTI4ODMxOTksImp0aSI6IjMwYjNkYzM0LTFjNjktNGIyNy04ODFkLTFmMTE2MTMzYTRlOCIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6IjUxYjRiYTM2In0.xFcJAEBmndC9GDjWVSKseCp7pL9Mtx_T6Z8PKJG3t2daI6Xun4Z1KaZiUEW1U335BvcIECCmKvqh_ld95fHcrw",
+                        toolbar: [
+                        'undo', 'redo', '|',
+                        'heading', '|', 'bold', 'italic', '|',
+                        'link', 'insertTable', 'mediaEmbed', '|',
+                        'bulletedList', 'numberedList', 'indent', 'outdent'
+                        ],
+                        plugins: [
+                        Bold,
+                        Essentials,
+                        Heading,
+                        Indent,
+                        IndentBlock,
+                        Italic,
+                        Link,
+                        List,
+                        MediaEmbed,
+                        Paragraph,
+                        Table,
+                        Undo
+                        ],
+                        initialData: '<h1>Hello from CKEditor 5!</h1>',
+                    } }
                 />
+                <h1>Hello world</h1>
             </div>
             <div className="flex items-center gap-[14px]">
                 <button type="submit" className="w-full rounded-full border border-[#060A23] p-[14px_20px] font-semibold text-nowrap">
