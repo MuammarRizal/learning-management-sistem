@@ -1,4 +1,4 @@
-import Header from "../dashboard/header"
+import Header from "../../../components/header"
 import ContentText from "./content-text"
 import ContentVideo from "./content-video"
 
