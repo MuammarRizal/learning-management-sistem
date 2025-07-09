@@ -1,7 +1,7 @@
 import { Link } from "react-router"
 import StudentCard from "./StudentCard"
 
-function StudentsPage() {
+function ManagerStudentsPage() {
   return (
     <>
         <header className="flex items-center justify-between gap-[30px]">
@@ -42,4 +42,4 @@ function StudentsPage() {
   )
 }
 
-export default StudentsPage
+export default ManagerStudentsPage

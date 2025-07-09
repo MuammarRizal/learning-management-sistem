@@ -1,9 +1,10 @@
 import Header from "./header";
 import Sidebar from "./Sidebar"
 import { Outlet, useMatch } from "react-router"
-
-const LayoutDashboard: React.FC = () => {
-  // Match the preview page route and infer the `id` param type
+type DashboardProps = {
+  isAdmin: Boolean
+}
+const LayoutDashboard: React.FC<DashboardProps> = ({isAdmin}) => {
   const match = useMatch("/manager/courses/:id/preview");
   const isPreviewPage: Boolean = match !== null;
   console.log(match)
@@ -12,7 +13,7 @@ const LayoutDashboard: React.FC = () => {
     <Outlet />
   ) : (
     <div className="flex min-h-screen">
-      <Sidebar />
+      <Sidebar isAdmin={isAdmin}/>
       <main className="flex flex-col flex-1 gap-[30px] p-[30px] ml-[290px]">
         <Header />
         <Outlet />
