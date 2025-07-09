@@ -12,6 +12,7 @@ import CourseDetailPage from "../pages/manager/course-detail";
 import CourseContentCreatePage from "../pages/manager/course-content-create";
 import CoursePreview from "../pages/manager/course-preview";
 import StudentsPage from "../pages/manager/students";
+import CreateStudentPage from "../pages/manager/create-student";
 
 const router = createBrowserRouter([
     {
@@ -63,7 +64,11 @@ const router = createBrowserRouter([
         {
           path: "/manager/students",
           element: <StudentsPage />
-        }
+        },
+        {
+          path: "/manager/students/create",
+          element: <CreateStudentPage />
+        },
       ]
     },
     {
