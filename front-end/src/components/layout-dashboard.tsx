@@ -5,9 +5,10 @@ type DashboardProps = {
   isAdmin: Boolean
 }
 const LayoutDashboard: React.FC<DashboardProps> = ({isAdmin}) => {
-  const match = useMatch("/manager/courses/:id/preview");
-  const isPreviewPage: Boolean = match !== null;
-  console.log(match)
+  const matchManager = useMatch("/manager/courses/:id/preview");
+  const matchStudent = useMatch("/student/courses/:id");
+  const isPreviewPage: Boolean = (matchManager || matchStudent) !== null;
+  // console.log(match)
 
   return isPreviewPage ? (
     <Outlet />

@@ -12,7 +12,7 @@ import CourseDetailPage from "../pages/manager/course-detail";
 import CourseContentCreatePage from "../pages/manager/course-content-create";
 import CoursePreview from "../pages/manager/course-preview";
 import CreateStudentPage from "../pages/manager/create-student";
-import StudentPage from "../pages/student";
+import StudentPage from "../pages/student/student-overview";
 import ManagerStudentsPage from "../pages/manager/students";
 
 const router = createBrowserRouter([
@@ -79,7 +79,11 @@ const router = createBrowserRouter([
         {
           index: true,
           element: <StudentPage />
-        }
+        },
+        {
+          path: "/student/courses/:id",
+          element: <CoursePreview />
+        },
       ]
     },
     {
