@@ -2,7 +2,7 @@ import express, {Request, Response} from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import bodyParser from 'body-parser'
-import router from './routes/index.routes'
+import router from './routes/index.route'
 
 dotenv.config()
 
