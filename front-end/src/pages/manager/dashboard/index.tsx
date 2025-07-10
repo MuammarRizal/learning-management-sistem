@@ -1,17 +1,17 @@
+import HeaderOverview from "./header";
 import LatestCourse from "./latest-course";
 import LatestStudent from "./latest-student";
 import Stats from "./stats";
 
-function DashboardManager() {
+function DashboardManagerPage() {
   return (
-    <>
-      <Stats />
-      <div className="grid grid-cols-2 gap-[30px]">
-          <LatestCourse />
-          <LatestStudent />
-      </div>
-    </>
+    <div className="grid grid-cols-1 gap-[30px]">
+        <HeaderOverview />
+        <Stats />
+        <LatestCourse />
+        <LatestStudent />
+    </div>
   )
 }
 
-export default DashboardManager
+export default DashboardManagerPage
