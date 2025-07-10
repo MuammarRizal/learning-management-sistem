@@ -1,13 +1,24 @@
 import express, {Request, Response} from 'express'
+import dotenv from 'dotenv'
+import cors from 'cors'
+import bodyParser from 'body-parser'
+import router from './routes/index.routes'
+
+dotenv.config()
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 
 app.use(express.json())
+app.use(cors())
+app.use(bodyParser.json())
+app.use(express.static('public'))
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Hello Typescript + Express!");
+    res.send("Buku Bersama!");
 })
+
+app.use("/api", router)
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`)
