@@ -3,6 +3,9 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import router from './routes/index.routes'
+import awsServerlessExpress from 'aws-serverless-express'
+import { APIGatewayProxyEvent, Context, Handler } from 'aws-lambda'
+import { createServer, proxy } from 'aws-serverless-express'
 
 dotenv.config()
 
@@ -20,6 +23,17 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/api", router)
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`)
-})
+// app.listen(PORT, () => {
+//     console.log(`Server running at http://localhost:${PORT}`)
+// })
+
+const server = createServer(app)
+
+export const handler = (
+    event: APIGatewayProxyEvent,
+    context: Context
+  ): void => {
+    context.callbackWaitsForEmptyEventLoop = false
+    awsServerlessExpress.proxy(server, event, context)
+  }
+  
