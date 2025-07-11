@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import router from './routes/index.route'
+import authRoutes from './routes/auth.route'
 
 dotenv.config()
 
@@ -19,6 +20,7 @@ app.get("/", (req: Request, res: Response) => {
 })
 
 app.use("/api", router)
+app.use("/api", authRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`)
