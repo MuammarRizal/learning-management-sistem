@@ -4,8 +4,10 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import router from './routes/index.route'
 import authRoutes from './routes/auth.route'
+import connectDB from './utils/database'
 
 dotenv.config()
+connectDB()
 
 const app = express()
 const PORT = process.env.PORT || 3001
