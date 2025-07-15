@@ -5,6 +5,7 @@ import bodyParser from 'body-parser'
 import router from './routes/index.route'
 import authRoutes from './routes/auth.route'
 import connectDB from './utils/database'
+import paymentRoutes from './routes/payment.route'
 
 dotenv.config()
 connectDB()
@@ -22,11 +23,12 @@ app.get("/", (req: Request, res: Response) => {
 })
 
 app.use("/api", router)
+app.use("/api", paymentRoutes)
 app.use("/api", authRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`)
-    console.log("Tahap : ",process.env.NODE_ENV)
+    console.log("Environment : ",process.env.NODE_ENV)
 })
 
 export default app

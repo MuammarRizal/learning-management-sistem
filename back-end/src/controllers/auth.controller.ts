@@ -24,7 +24,8 @@ export const signUpAction = async (req: Request, res: Response) => {
         // action payment gateway midtrans
         const transaction = new TransactionModel({
             user: user._id,
-            price: 2800000
+            price: 2800000,
+            email: user.email
         })
 
         const dataMidtrans = {
