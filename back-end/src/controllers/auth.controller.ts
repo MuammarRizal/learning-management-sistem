@@ -41,7 +41,7 @@ export const signUpAction = async (req: Request, res: Response) => {
                 role: user.role
             },
             callbacks: {
-                finish: 'http://localhost:5173/success-checkout'
+                finish: `${process.env.NODE_ENV === 'development' ? process.env.LOCAL_URL : process.env.PRODUCTION_URL}/success-checkout`
             }
         }
 

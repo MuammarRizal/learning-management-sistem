@@ -26,6 +26,7 @@ app.use("/api", authRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`)
+    console.log("Tahap : ",process.env.NODE_ENV)
 })
 
 export default app
