@@ -32,6 +32,14 @@ const router = createBrowserRouter([
       path: "/success-checkout",
       element: <SuccessCheckoutPage />
     },
+    {
+      path: "/sign-in",
+      element: <SignIn />
+    },
+    {
+      path: "/sign-up",
+      element: <SignUp />
+    },
 
     // Manager
     {
@@ -85,14 +93,6 @@ const router = createBrowserRouter([
           element: <CoursePreview />
         },
       ]
-    },
-    {
-      path: "/manager/sign-in",
-      element: <SignIn />
-    },
-    {
-      path: "/manager/sign-up",
-      element: <SignUp />
     },
 ])
 
