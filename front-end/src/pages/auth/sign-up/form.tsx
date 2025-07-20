@@ -1,12 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema } from "../../../utils/zod.schema";
-import type { SignUpData } from "./sign-up.type";
-
-type FormSignUpProps = {
-  getDataForm: (data: SignUpData) => void;
-  setMode: (mode: "AUTH" | "PRICING") => void;
-};
+import type { FormSignUpProps, SignUpData } from "../../../types/auth.type";
 
 function FormSignUp({ getDataForm, setMode }: FormSignUpProps) {
   const {

@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import Navbar from "../../../components/Navbar";
 import { useMutation } from "@tanstack/react-query";
 import { postSignUp } from "../../../services/auth.service";
-import type { SignUpData } from "./sign-up.type";
+import type { SignUpData } from "../../../types/auth.type";
 
 function Pricing({ dataForm }: { dataForm: SignUpData | null }) {
   const { mutateAsync, isPending } = useMutation({

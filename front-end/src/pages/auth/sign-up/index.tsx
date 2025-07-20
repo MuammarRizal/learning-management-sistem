@@ -2,7 +2,7 @@ import FormSignUp from "./form";
 import Navbar from "../../../components/Navbar";
 import { useState } from "react";
 import Pricing from "./pricing";
-import type { SignUpData } from "./sign-up.type";
+import type { SignUpData } from "../../../types/auth.type";
 function SignUp() {
   const [dataForm, setDataForm] = useState<SignUpData | null>(null);
   const [mode, setMode] = useState<"AUTH" | "PRICING">("AUTH");
