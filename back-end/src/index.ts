@@ -18,7 +18,9 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Buku Bersama!");
+  res.json({
+    message: "Buku Bersama API",
+  });
 });
 
 app.use("/api", paymentRoutes);
