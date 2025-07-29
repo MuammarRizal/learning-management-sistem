@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import authRoutes from "./routes/auth.route";
 import connectDB from "./utils/database";
 import paymentRoutes from "./routes/payment.route";
+import courseRoutes from "./routes/course.route";
 
 dotenv.config();
 connectDB();
@@ -25,6 +26,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/api", paymentRoutes);
 app.use("/api", authRoutes);
+app.use("/api", courseRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
