@@ -25,12 +25,12 @@ export const fileStorageCourse = multer.diskStorage({
 export const fileFilter = (
   req: Request,
   file: Express.Multer.File,
-  cb: (error: Error | null, filename: string | boolean) => void
+  cb: FileFilterCallback
 ) => {
   if (
-    file.mimetype === "images/jpeg" ||
-    file.mimetype === "images/jpg" ||
-    file.mimetype === "images/png"
+    file.mimetype === "image/jpeg" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/png"
   ) {
     cb(null, true);
   } else {
