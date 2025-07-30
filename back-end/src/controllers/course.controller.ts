@@ -5,6 +5,7 @@ import { mutateCourseSchema } from "../utils/schema.zod";
 import fs from "fs";
 import categoryModel from "../models/category.model";
 import userModel from "../models/user.model";
+import path from "path";
 export const getCourses = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const courses = await coursesModel
@@ -48,13 +49,11 @@ export const postCourse = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const body = req.body;
 
-    // ✅ Validasi input menggunakan Zod
     const validation = mutateCourseSchema.safeParse(body);
 
     if (!validation.success) {
       const errorMessages = validation.error.issues.map((err) => err.message);
 
-      // 🧹 Hapus file yang sudah ter-upload jika validasi gagal
       if (req.file?.path && fs.existsSync(req.file.path)) {
         fs.unlinkSync(req.file.path);
       }
@@ -75,6 +74,7 @@ export const postCourse = async (req: AuthenticatedRequest, res: Response) => {
         message: "Category ID not found",
       });
     }
+    console.log(req.user);
 
     // ✅ Simpan course baru
     const course = new coursesModel({
@@ -121,6 +121,128 @@ export const postCourse = async (req: AuthenticatedRequest, res: Response) => {
 
     return res.status(500).json({
       message: "Internal server error",
+    });
+  }
+};
+
+export const updateCourse = async (
+  req: AuthenticatedRequest,
+  res: Response
+) => {
+  try {
+    const body = req.body;
+    const courseId = req.params.id;
+
+    const validation = mutateCourseSchema.safeParse(body);
+
+    if (!validation.success) {
+      const errorMessages = validation.error.issues.map((err) => err.message);
+
+      if (req.file?.path && fs.existsSync(req.file.path)) {
+        fs.unlinkSync(req.file.path);
+      }
+
+      return res.status(400).json({
+        message: "Validation error",
+        data: null,
+        errors: errorMessages,
+      });
+    }
+
+    const { name, categoryId, tagline, description } = validation.data;
+
+    // ✅ Cek apakah kategori ada
+    const category = await categoryModel.findById(categoryId);
+    const oldCourse = await coursesModel.findById(courseId);
+
+    if (!category) {
+      return res.status(404).json({
+        message: "Category ID not found",
+      });
+    }
+
+    if (!req.user || !req.user._id) {
+      return res.status(401).json({
+        message: "User not found",
+      });
+    }
+
+    const data = await coursesModel.findByIdAndUpdate(
+      courseId,
+      {
+        name: name,
+        category: categoryId,
+        description: description,
+        tagline: tagline,
+        thumbnail: req?.file ? req.file?.filename : oldCourse?.thumbnail,
+        manager: req.user._id,
+      },
+      {
+        new: true,
+      }
+    );
+
+    if (!data) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+    // ✅ Simpan course baru
+    if (req.file && oldCourse?.thumbnail) {
+      const oldPath = `${__dirname}/../../public/uploads/courses/${oldCourse.thumbnail}`;
+      if (fs.existsSync(oldPath)) {
+        fs.unlinkSync(oldPath);
+      }
+    }
+
+    return res.status(201).json({
+      message: "Update Course successfully",
+      data,
+    });
+  } catch (err) {
+    console.error("Error creating course:", err);
+
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
+export const deleteCourse = async (
+  req: Request<{ id: string }>,
+  res: Response
+) => {
+  try {
+    const { id } = req.params;
+
+    const course = await coursesModel.findById(id);
+
+    if (!course) {
+      return res.status(404).json({
+        message: "Course Is Not Found",
+      });
+    }
+    const filePath = path.join(
+      __dirname,
+      "..",
+      "..",
+      "public/uploads/courses",
+      course.thumbnail
+    );
+
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+
+    await coursesModel.findByIdAndDelete(id);
+
+    return res.status(200).json({
+      message: "Delete Course Success",
+      id,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error,
     });
   }
 };
