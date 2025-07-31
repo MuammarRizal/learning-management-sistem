@@ -21,4 +21,4 @@ const courseDetailModel = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("CourseDetail", courseDetailModel);
+export default mongoose.model("Course-Detail", courseDetailModel);
