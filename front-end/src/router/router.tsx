@@ -16,84 +16,84 @@ import StudentPage from "../pages/student/student-overview";
 import ManagerStudentsPage from "../pages/manager/students";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <ManagerPage />
-    },
-    {
-      path: "/about",
-      element: "heiii"
-    },
-    {
-      path: "/pricing",
-      element: <Pricing />
-    },
-    {
-      path: "/success-checkout",
-      element: <SuccessCheckoutPage />
-    },
-    {
-      path: "/sign-in",
-      element: <SignIn />
-    },
-    {
-      path: "/sign-up",
-      element: <SignUp />
-    },
+  {
+    path: "/",
+    element: <ManagerPage />,
+  },
+  {
+    path: "/about",
+    element: "heiii",
+  },
+  {
+    path: "/pricing",
+    element: <Pricing dataForm={null} />,
+  },
+  {
+    path: "/success-checkout",
+    element: <SuccessCheckoutPage />,
+  },
+  {
+    path: "/sign-in",
+    element: <SignIn />,
+  },
+  {
+    path: "/sign-up",
+    element: <SignUp />,
+  },
 
-    // Manager
-    {
-      path: "/manager",
-      element: <LayoutDashboard isAdmin={true}/>,
-      children: [
-        {
-          index: true,
-          element: <DashboardManagerPage />
-        },
-        {
-          path: "/manager/courses",
-          element: <ManagerCoursePage />,
-        },
-        {
-          path: "/manager/course/create",
-          element: <CreateCoursePage />
-        },
-        {
-          path: "/manager/course/:id",
-          element: <CourseDetailPage />
-        },
-        {
-          path: "/manager/courses/:id/create",
-          element: <CourseContentCreatePage />
-        },
-        {
-          path: "/manager/courses/:id/preview",
-          element: <CoursePreview />
-        },
-        {
-          path: "/manager/students",
-          element: <ManagerStudentsPage />
-        },
-        {
-          path: "/manager/students/create",
-          element: <CreateStudentPage />
-        },
-      ]
-    },
-    {
-      path: "/student",
-      element: <LayoutDashboard isAdmin={false}/>,
-      children: [
-        {
-          index: true,
-          element: <StudentPage />
-        },
-        {
-          path: "/student/courses/:id",
-          element: <CoursePreview />
-        },
-      ]
-    },
-])
+  // Manager
+  {
+    path: "/manager",
+    element: <LayoutDashboard isAdmin={true} />,
+    children: [
+      {
+        index: true,
+        element: <DashboardManagerPage />,
+      },
+      {
+        path: "/manager/courses",
+        element: <ManagerCoursePage />,
+      },
+      {
+        path: "/manager/course/create",
+        element: <CreateCoursePage />,
+      },
+      {
+        path: "/manager/course/:id",
+        element: <CourseDetailPage />,
+      },
+      {
+        path: "/manager/courses/:id/create",
+        element: <CourseContentCreatePage />,
+      },
+      {
+        path: "/manager/courses/:id/preview",
+        element: <CoursePreview />,
+      },
+      {
+        path: "/manager/students",
+        element: <ManagerStudentsPage />,
+      },
+      {
+        path: "/manager/students/create",
+        element: <CreateStudentPage />,
+      },
+    ],
+  },
+  {
+    path: "/student",
+    element: <LayoutDashboard isAdmin={false} />,
+    children: [
+      {
+        index: true,
+        element: <StudentPage />,
+      },
+      {
+        path: "/student/courses/:id",
+        element: <CoursePreview />,
+      },
+    ],
+  },
+]);
 
-export default router
+export default router;
