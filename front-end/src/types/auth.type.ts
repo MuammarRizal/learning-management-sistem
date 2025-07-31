@@ -1,7 +1,7 @@
-export type SignInType = {
+export interface SignInType {
   email: string;
   password: string;
-};
+}
 
 export type FormSignUpProps = {
   getDataForm: (data: SignUpData) => void;
@@ -12,8 +12,13 @@ export type FormSignInProps = {
   getDataForm: (data: SignInType) => void;
 };
 
-export type SignUpData = {
+export interface SignUpData extends SignInType {
   name: string;
+}
+
+export interface DataSession {
   email: string;
-  password: string;
-};
+  name: string;
+  role: string;
+  token: string;
+}
