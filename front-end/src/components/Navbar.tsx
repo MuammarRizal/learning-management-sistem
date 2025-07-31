@@ -1,8 +1,8 @@
 import { Link, useMatch } from "react-router";
 
 function Navbar() {
-  //   const authMatchParams = useMatch("/sign-up");
-  //   console.log("Auth Match Params: ", authMatchParams);
+  const authMatchParams = useMatch("/sign-up");
+  console.log("Auth Match Params: ", authMatchParams);
   return (
     <nav className="flex items-center justify-between p-[30px]">
       <div className="flex items-center gap-[60px]">
