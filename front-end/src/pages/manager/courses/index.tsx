@@ -1,7 +1,9 @@
-import { Link } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import CardComp from "../../../components/manager/courses/card";
+import type { CourseType } from "../../../types/course.type";
 
 function ManagerCoursePage() {
+  const courses = useLoaderData<CourseType[]>();
   return (
     <>
       <header className="flex items-center justify-between gap-[30px]">
@@ -19,7 +21,10 @@ function ManagerCoursePage() {
         </div>
       </header>
       <section id="CourseList" className="flex flex-col w-full rounded-[30px] p-[30px] gap-[30px] bg-[#F8FAFB]">
-        <CardComp id={1} thumbnail="/assets/images/thumbnails/th-1.png" name="Responsive Design Triclorem Lorem, ipsum dolor." totalStudents={1} categories="programming" />
+        {courses.map((course) => (
+          <CardComp key={course._id} id={course._id} thumbnail={course.thumbnail_url} name={course.name} totalStudents={course.total_students} categories={course.category.name} />
+        ))}
+
         {/* <div id="Pagination" className="flex items-center gap-3">
                 <button type="button" className="flex shrink-0 w-9 h-9 rounded-full items-center justify-center text-center transition-all duration-300 hover:bg-[#662FFF] hover:text-white hover:border-0 bg-[#662FFF] text-white">
                     <span className="font-semibold text-sm leading-[21px]">1</span>

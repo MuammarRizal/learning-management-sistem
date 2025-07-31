@@ -1,14 +1,14 @@
 import { Link } from "react-router";
 
 type cardProps = {
-  id: number;
+  id: string;
   thumbnail: string;
   name: string;
   totalStudents: number;
   categories: string;
 };
 
-function CardComp({ id = 1, thumbnail = "/assets/images/thumbnails/th-1.png", name = "Responsive Design Triclorem Lorem, ipsum dolor.", totalStudents = 1, categories = "programming" }: cardProps) {
+function CardComp({ id = "1", thumbnail = "/assets/images/thumbnails/th-1.png", name = "Responsive Design Triclorem Lorem, ipsum dolor.", totalStudents = 1, categories = "programming" }: cardProps) {
   return (
     <div className="card flex items-center gap-5">
       <div className="flex shrink-0 w-[140px] h-[110px] rounded-[20px] bg-[#D9D9D9] overflow-hidden">
