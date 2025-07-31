@@ -3,5 +3,12 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "outDir": "./build",
+    "rootDir": "./src",
+    "module": "commonjs",
+    "target": "ES6",
+    "esModuleInterop": true
+  }
 }
