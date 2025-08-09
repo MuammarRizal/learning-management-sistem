@@ -9,3 +9,11 @@ export interface CourseType {
   _id: string;
   id?: string;
 }
+
+export interface DataForm {
+  name: string;
+  categoryId: string;
+  tagline: string;
+  description: string;
+  thumbnail: File | string;
+}

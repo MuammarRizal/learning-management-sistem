@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 type SidebarProps = {
-  isAdmin: Boolean;
+  isAdmin: boolean;
 };
 function Sidebar({ isAdmin }: SidebarProps) {
   return (

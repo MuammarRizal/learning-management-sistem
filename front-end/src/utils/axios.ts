@@ -17,7 +17,6 @@ export const apiInstanceAuth = axios.create({
 
 apiInstanceAuth.interceptors.request.use((config) => {
   const session = secureLocalStorage.getItem(STORAGE_KEY) as DataSession;
-  console.log({ config });
   if (!session) {
     return config;
   }

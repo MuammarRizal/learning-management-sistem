@@ -2,12 +2,12 @@ import Header from "./header";
 import Sidebar from "./Sidebar";
 import { Outlet, useMatch } from "react-router";
 type DashboardProps = {
-  isAdmin: Boolean;
+  isAdmin: boolean;
 };
 const LayoutDashboard: React.FC<DashboardProps> = ({ isAdmin }) => {
   const matchManager = useMatch("/manager/courses/:id/preview");
   const matchStudent = useMatch("/student/courses/:id");
-  const isPreviewPage: Boolean = (matchManager || matchStudent) !== null;
+  const isPreviewPage: boolean = (matchManager || matchStudent) !== null;
   // console.log(match)
 
   return isPreviewPage ? (
