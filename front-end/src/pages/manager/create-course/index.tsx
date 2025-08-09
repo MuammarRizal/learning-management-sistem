@@ -1,6 +1,9 @@
-import { Link } from "react-router";
+import { Link, useLoaderData } from "react-router";
+import type { CategoriesType } from "../../../types/categories.type";
 
 function CreateCoursePage() {
+  const categories = useLoaderData();
+  console.log(categories);
   const clickEvent = () => {
     const thumbnail = document.getElementById("thumbnail");
     if (thumbnail) {
@@ -39,7 +42,7 @@ function CreateCoursePage() {
               <img src="/assets/images/icons/gallery-add-black.svg" className="w-6 h-6" alt="icon" />
               <span className="text-[#838C9D]">Add an attachment</span>
             </button>
-            <img id="thumbnail-preview" src="" className="w-full h-full object-cover hidden" alt="thumbnail" />
+            <img id="thumbnail-preview" src="/d" className="w-full h-full object-cover hidden" alt="thumbnail" />
             <button type="button" id="delete-preview" className="absolute right-[10px] bottom-[10px] w-12 h-12 rounded-full z-10 hidden">
               <img src="/assets/images/icons/delete.svg" alt="delete" />
             </button>
@@ -65,9 +68,11 @@ function CreateCoursePage() {
               <option value="" hidden>
                 Choose one category
               </option>
-              <option value="">test</option>
-              <option value="">test</option>
-              <option value="">test</option>
+              {categories.data.map((item: CategoriesType) => (
+                <option value={item._id} key={item._id}>
+                  {item.name}
+                </option>
+              ))}
             </select>
             <img src="/assets/images/icons/arrow-down.svg" className="w-6 h-6" alt="icon" />
           </div>

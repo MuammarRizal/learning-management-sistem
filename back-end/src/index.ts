@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.route";
 import connectDB from "./utils/database";
 import paymentRoutes from "./routes/payment.route";
 import courseRoutes from "./routes/course.route";
+import categoriesRoutes from "./routes/categories.route";
 
 dotenv.config();
 connectDB();
@@ -25,6 +26,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/api", paymentRoutes);
+app.use("/api", categoriesRoutes);
 app.use("/api", authRoutes);
 app.use("/api", courseRoutes);
 

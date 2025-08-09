@@ -74,7 +74,6 @@ export const postCourse = async (req: AuthenticatedRequest, res: Response) => {
         message: "Category ID not found",
       });
     }
-    console.log(req.user);
 
     // ✅ Simpan course baru
     const course = new coursesModel({

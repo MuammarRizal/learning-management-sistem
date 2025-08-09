@@ -18,6 +18,7 @@ import secureLocalStorage from "react-secure-storage";
 import { MANAGER_SESSION, STORAGE_KEY } from "../utils/const";
 import type { DataSession } from "../types/auth.type";
 import { getCourses } from "../services/course.service";
+import { getCategories } from "../services/categories.service";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/manager/course/create",
+        loader: async () => {
+          const categories = await getCategories();
+          return categories;
+        },
         element: <CreateCoursePage />,
       },
       {
@@ -98,6 +103,13 @@ const router = createBrowserRouter([
   },
   {
     path: "/student",
+    loader: async () => {
+      const session = secureLocalStorage.getItem(STORAGE_KEY) as DataSession | null;
+      if (!session) {
+        throw redirect("/sign-in");
+      }
+      return session;
+    },
     element: <LayoutDashboard isAdmin={false} />,
     children: [
       {
