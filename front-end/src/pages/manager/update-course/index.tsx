@@ -97,7 +97,7 @@ function UpdateCoursePage() {
                 <div className="flex gap-3 ">
                   <img src="/assets/images/icons/gallery-add-black.svg" className="w-6 h-6" alt="icon" />
                   <span className="text-[#838C9D]">Add an attachment</span>
-                </div>
+                </div> 
               )} */}
             </button>
             <img id="thumbnail-preview" src={file !== null ? URL.createObjectURL(file) : `${import.meta.env.VITE_IMAGE_URL_API}/${course.thumbnail}`} className={`w-full h-full object-cover block`} alt="thumbnail" />

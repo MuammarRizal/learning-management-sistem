@@ -4,6 +4,8 @@ import type { CourseType } from "../../../types/course.type";
 
 function ManagerCoursePage() {
   const courses = useLoaderData<CourseType[]>();
+
+  console.log(!courses.length);
   return (
     <>
       <header className="flex items-center justify-between gap-[30px]">
@@ -21,9 +23,7 @@ function ManagerCoursePage() {
         </div>
       </header>
       <section id="CourseList" className="flex flex-col w-full rounded-[30px] p-[30px] gap-[30px] bg-[#F8FAFB]">
-        {courses.map((course) => (
-          <CardComp key={course._id} id={course._id} thumbnail={course.thumbnail_url} name={course.name} totalStudents={course.total_students} categories={course.category.name} />
-        ))}
+        {courses.length > 0 ? courses.map((course) => <CardComp key={course._id} id={course._id} thumbnail={course.thumbnail_url} name={course.name} totalStudents={course.total_students} categories={course.category.name} />) : <div className="flex justify-center items-center text-slate-500">Courses Not Found</div>}
 
         {/* <div id="Pagination" className="flex items-center gap-3">
                 <button type="button" className="flex shrink-0 w-9 h-9 rounded-full items-center justify-center text-center transition-all duration-300 hover:bg-[#662FFF] hover:text-white hover:border-0 bg-[#662FFF] text-white">
