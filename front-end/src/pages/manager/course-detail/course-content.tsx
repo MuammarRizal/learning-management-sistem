@@ -11,7 +11,7 @@ function CourseContent() {
         </Link>
       </div>
       <ContentItem id={1} courseId={1} index={1} title="Belajar HTML" type="video" key={1} />
-      <ContentItem id={2} courseId={2} index={2} title="Belajar CSS" type="text" key={1} />
+      <ContentItem id={2} courseId={2} index={2} title="Belajar CSS" type="text" key={2} />
       <div id="Pagination" className="flex items-center gap-3">
         <button type="button" className="flex shrink-0 w-9 h-9 rounded-full items-center justify-center text-center transition-all duration-300 hover:bg-[#662FFF] hover:text-white hover:border-0 bg-[#662FFF] text-white">
           <span className="font-semibold text-sm leading-[21px]">1</span>

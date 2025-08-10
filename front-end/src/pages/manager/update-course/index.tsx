@@ -1,15 +1,16 @@
-import { Link, useLoaderData, useNavigate } from "react-router";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router";
 import type { CategoriesType } from "../../../types/categories.type";
 import { useForm } from "react-hook-form";
 import { useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { createCourses } from "../../../services/course.service";
+import { updateCourses } from "../../../services/course.service";
 import type { DataForm } from "../../../types/course.type";
-import { createCourseSchema } from "../../../utils/zod.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
 
-function CreateCoursePage() {
-  const { categories }: { categories: CategoriesType[] } = useLoaderData();
+function UpdateCoursePage() {
+  const { id } = useParams();
+  const { categories, course }: { categories: CategoriesType[]; course: DataForm } = useLoaderData();
+
+  console.log(course);
 
   const {
     register,
@@ -17,11 +18,18 @@ function CreateCoursePage() {
     setValue,
     handleSubmit,
   } = useForm({
-    resolver: zodResolver(createCourseSchema),
+    defaultValues: {
+      name: course.name,
+      categoryId: course.categoryId,
+      description: course.description,
+      tagline: course.tagline,
+      thumbnail: course.thumbnail,
+    },
+    // resolver: zodResolver(!course ? createCourseSchema : updateCourseSchema),
   });
 
-  const mutateCreateCourse = useMutation({
-    mutationFn: (data: DataForm) => createCourses(data),
+  const mutateUpdateCourse = useMutation({
+    mutationFn: (data: DataForm) => updateCourses(id as string, data),
   });
 
   const navigate = useNavigate();
@@ -30,9 +38,8 @@ function CreateCoursePage() {
 
   const onHandleSubmit = async (data: DataForm) => {
     try {
-      await mutateCreateCourse.mutateAsync({
+      await mutateUpdateCourse.mutateAsync({
         name: data.name,
-        thumbnail: file || "https://localhost:3001/image.jpg",
         tagline: data.tagline,
         categoryId: data.categoryId,
         description: data.description,
@@ -86,14 +93,14 @@ function CreateCoursePage() {
           </label>
           <div id="thumbnail-preview-container" className="relative flex shrink-0 w-full h-[200px] rounded-[20px] border border-[#CFDBEF] overflow-hidden">
             <button onClick={() => inputFileRef.current?.click()} type="button" id="trigger-input" className="absolute top-0 left-0 w-full h-full flex justify-center items-center gap-3 z-0 cursor-pointer ">
-              {!file && (
+              {/* {!file && (
                 <div className="flex gap-3 ">
                   <img src="/assets/images/icons/gallery-add-black.svg" className="w-6 h-6" alt="icon" />
                   <span className="text-[#838C9D]">Add an attachment</span>
                 </div>
-              )}
+              )} */}
             </button>
-            <img id="thumbnail-preview" src={file !== null ? URL.createObjectURL(file) : "image"} className={`w-full h-full object-cover ${file ? "block" : "hidden"}`} alt="thumbnail" />
+            <img id="thumbnail-preview" src={file !== null ? URL.createObjectURL(file) : `${import.meta.env.VITE_IMAGE_URL_API}/${course.thumbnail}`} className={`w-full h-full object-cover block`} alt="thumbnail" />
             <button type="button" id="delete-preview" className="absolute right-[10px] bottom-[10px] w-12 h-12 rounded-full z-10 hidden">
               <img src="/assets/images/icons/delete.svg" alt="delete" />
             </button>
@@ -159,8 +166,8 @@ function CreateCoursePage() {
           <button type="button" className="w-full rounded-full border border-[#060A23] p-[14px_20px] font-semibold text-nowrap">
             Save as Draft
           </button>
-          <button disabled={mutateCreateCourse.isPending} type="submit" className="cursor-pointer w-full rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap">
-            Create Now
+          <button disabled={mutateUpdateCourse.isPending} type="submit" className="cursor-pointer w-full rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap">
+            Update Course
           </button>
         </div>
       </form>
@@ -168,4 +175,4 @@ function CreateCoursePage() {
   );
 }
 
-export default CreateCoursePage;
+export default UpdateCoursePage;

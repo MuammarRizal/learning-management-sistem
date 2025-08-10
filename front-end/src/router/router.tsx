@@ -17,8 +17,9 @@ import ManagerStudentsPage from "../pages/manager/students";
 import secureLocalStorage from "react-secure-storage";
 import { MANAGER_SESSION, STORAGE_KEY } from "../utils/const";
 import type { DataSession } from "../types/auth.type";
-import { getCourses } from "../services/course.service";
+import { getCourseDetailById, getCourses } from "../services/course.service";
 import { getCategories } from "../services/categories.service";
+import UpdateCoursePage from "../pages/manager/update-course";
 
 const router = createBrowserRouter([
   {
@@ -75,9 +76,18 @@ const router = createBrowserRouter([
         path: "/manager/course/create",
         loader: async () => {
           const categories = await getCategories();
-          return categories;
+          return { categories: categories.data };
         },
         element: <CreateCoursePage />,
+      },
+      {
+        path: "/manager/course/edit/:id",
+        loader: async ({ params }) => {
+          const categories = await getCategories();
+          const course = await getCourseDetailById(params.id as string);
+          return { categories: categories.data, course: course.data };
+        },
+        element: <UpdateCoursePage />,
       },
       {
         path: "/manager/course/:id",

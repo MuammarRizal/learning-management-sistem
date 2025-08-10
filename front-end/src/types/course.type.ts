@@ -15,5 +15,5 @@ export interface DataForm {
   categoryId: string;
   tagline: string;
   description: string;
-  thumbnail: File | string;
+  thumbnail?: File | string;
 }
