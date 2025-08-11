@@ -8,9 +8,8 @@ const courseDetailModel = new mongoose.Schema(
       enum: ["video", "text", "video-text"],
       default: "video",
     },
-    videoId: String,
+    youtubeId: String,
     text: String,
-    videoText: String,
     course: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Course",

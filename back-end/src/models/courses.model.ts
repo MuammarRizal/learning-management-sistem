@@ -10,7 +10,7 @@ const coursesModel = new mongoose.Schema({
   thumbnail: { type: String, required: true },
   category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
+    ref: categoryModel.modelName,
   },
   tagline: {
     type: String,
@@ -23,17 +23,19 @@ const coursesModel = new mongoose.Schema({
   students: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: userModel.modelName,
     },
   ],
   manager: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: userModel.modelName,
   },
-  details: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "CourseModel",
-  },
+  details: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: courseDetailModel.modelName,
+    },
+  ],
 });
 
 coursesModel.post("findOneAndDelete", async (doc) => {

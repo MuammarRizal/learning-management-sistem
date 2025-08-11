@@ -6,6 +6,7 @@ import fs from "fs";
 import categoryModel from "../models/category.model";
 import userModel from "../models/user.model";
 import path from "path";
+import courseDetailModel from "../models/course-detail.model";
 export const getCourses = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const courses = await coursesModel
@@ -38,6 +39,32 @@ export const getCourses = async (req: AuthenticatedRequest, res: Response) => {
     });
   } catch (error) {
     console.log({ error });
+    return res.json({
+      message: "Server internal error",
+      error,
+    });
+  }
+};
+
+export const getCourseDetailById = async (
+  req: AuthenticatedRequest,
+  res: Response
+) => {
+  try {
+    const { id } = req.params;
+    const detailCourse = await coursesModel.findById(id).populate("details");
+    console.log(detailCourse?.details);
+    if (!detailCourse) {
+      return res.json({
+        message: "Get Detail courses failed, data Not Found",
+      });
+    }
+    return res.json({
+      message: "Get Detail data Success",
+      data: detailCourse,
+    });
+  } catch (error) {
+    console.log("Internal server Error");
     return res.json({
       message: "Server internal error",
       error,
