@@ -60,7 +60,7 @@ courseRoutes.post(
   postContentCourse
 );
 
-courseRoutes.post(
+courseRoutes.put(
   "/courses/contents/:id",
   verifyToken,
   validateRequest(mutateContentSchema),
