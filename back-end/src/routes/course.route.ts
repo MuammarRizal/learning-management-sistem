@@ -9,7 +9,10 @@ import {
 } from "../controllers/course.controller";
 import multer from "multer";
 import { fileFilter, fileStorageCourse } from "../utils/multer";
-import { postContentCourse } from "../controllers/content.controller";
+import {
+  postContentCourse,
+  updateContentCourse,
+} from "../controllers/content.controller";
 import { validateRequest } from "../middlewares/validateRequest.middleware";
 import { mutateContentSchema } from "../utils/schema.zod";
 
@@ -55,6 +58,13 @@ courseRoutes.post(
   verifyToken,
   validateRequest(mutateContentSchema),
   postContentCourse
+);
+
+courseRoutes.post(
+  "/courses/contents/:id",
+  verifyToken,
+  validateRequest(mutateContentSchema),
+  updateContentCourse
 );
 
 export default courseRoutes;

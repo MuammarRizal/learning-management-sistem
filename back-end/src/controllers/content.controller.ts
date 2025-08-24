@@ -43,3 +43,38 @@ export const postContentCourse = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const updateContentCourse = async (req: Request, res: Response) => {
+  try {
+    const body = req.body;
+    const { id } = req.params;
+
+    const course = await coursesModel.findById(body.courseId);
+
+    if (!course) {
+      return res.json({
+        message: "Course Not Found",
+      });
+    }
+
+    const updateCourse = await courseDetailModel.findByIdAndUpdate(
+      id,
+      {
+        title: body.title,
+        type: body.type,
+        course: course._id,
+        text: body.text,
+        youtubeId: body.youtubeId,
+      },
+      { new: true }
+    );
+
+    return res.json({ message: "Update Content Success", data: updateCourse });
+  } catch (error) {
+    console.error("Error creating content course:", error);
+
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
