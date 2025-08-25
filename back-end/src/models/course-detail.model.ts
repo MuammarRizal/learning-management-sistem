@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import coursesModel from "./courses.model";
 
 const courseDetailModel = new mongoose.Schema(
   {
@@ -19,5 +20,15 @@ const courseDetailModel = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+courseDetailModel.post("findOneAndDelete", async (doc) => {
+  if (doc) {
+    await coursesModel.findByIdAndUpdate(doc.course, {
+      $pull: {
+        details: doc._id,
+      },
+    });
+  }
+});
 
 export default mongoose.model("Course-Detail", courseDetailModel);

@@ -78,3 +78,21 @@ export const updateContentCourse = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const deleteContentCourse = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const data = await courseDetailModel.findByIdAndDelete(id);
+
+    return res.json({
+      message: "Delete Content Success",
+      data_delete: data,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};

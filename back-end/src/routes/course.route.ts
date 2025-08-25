@@ -10,6 +10,7 @@ import {
 import multer from "multer";
 import { fileFilter, fileStorageCourse } from "../utils/multer";
 import {
+  deleteContentCourse,
   postContentCourse,
   updateContentCourse,
 } from "../controllers/content.controller";
@@ -65,6 +66,13 @@ courseRoutes.put(
   verifyToken,
   validateRequest(mutateContentSchema),
   updateContentCourse
+);
+
+courseRoutes.delete(
+  "/courses/contents/:id",
+  verifyToken,
+  upload.single("thumbnail"),
+  deleteContentCourse
 );
 
 export default courseRoutes;
