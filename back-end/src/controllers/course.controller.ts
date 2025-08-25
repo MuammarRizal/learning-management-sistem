@@ -52,8 +52,12 @@ export const getCourseDetailById = async (
 ) => {
   try {
     const { id } = req.params;
-    const detailCourse = await coursesModel.findById(id).populate("details");
-    console.log(detailCourse?.details);
+    const { preview } = req.query;
+    const detailCourse = await coursesModel.findById(id).populate({
+      path: "details",
+      select: preview == "true" ? "title type youtubeId text" : "title type",
+    });
+
     if (!detailCourse) {
       return res.json({
         message: "Get Detail courses failed, data Not Found",
