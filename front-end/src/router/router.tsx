@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, redirect } from "react-router";
 import ManagerPage from "../pages/manager/dashboard";
 import SignIn from "../pages/auth/sign-in";
 import SignUp from "../pages/auth/sign-up";
@@ -14,86 +14,124 @@ import CoursePreview from "../pages/manager/course-preview";
 import CreateStudentPage from "../pages/manager/create-student";
 import StudentPage from "../pages/student/student-overview";
 import ManagerStudentsPage from "../pages/manager/students";
+import secureLocalStorage from "react-secure-storage";
+import { MANAGER_SESSION, STORAGE_KEY } from "../utils/const";
+import type { DataSession } from "../types/auth.type";
+import { getCourseDetailById, getCourses } from "../services/course.service";
+import { getCategories } from "../services/categories.service";
+import UpdateCoursePage from "../pages/manager/update-course";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <ManagerPage />
-    },
-    {
-      path: "/about",
-      element: "heiii"
-    },
-    {
-      path: "/pricing",
-      element: <Pricing />
-    },
-    {
-      path: "/success-checkout",
-      element: <SuccessCheckoutPage />
-    },
+  {
+    path: "/",
+    element: <ManagerPage />,
+  },
+  {
+    path: "/about",
+    element: "heiii",
+  },
+  {
+    path: "/pricing",
+    element: <Pricing dataForm={null} />,
+  },
+  {
+    path: "/success-checkout",
+    element: <SuccessCheckoutPage />,
+  },
+  {
+    path: "/sign-in",
+    element: <SignIn />,
+  },
+  {
+    path: "/sign-up",
+    element: <SignUp />,
+  },
 
-    // Manager
-    {
-      path: "/manager",
-      element: <LayoutDashboard isAdmin={true}/>,
-      children: [
-        {
-          index: true,
-          element: <DashboardManagerPage />
-        },
-        {
-          path: "/manager/courses",
-          element: <ManagerCoursePage />,
-        },
-        {
-          path: "/manager/course/create",
-          element: <CreateCoursePage />
-        },
-        {
-          path: "/manager/course/:id",
-          element: <CourseDetailPage />
-        },
-        {
-          path: "/manager/courses/:id/create",
-          element: <CourseContentCreatePage />
-        },
-        {
-          path: "/manager/courses/:id/preview",
-          element: <CoursePreview />
-        },
-        {
-          path: "/manager/students",
-          element: <ManagerStudentsPage />
-        },
-        {
-          path: "/manager/students/create",
-          element: <CreateStudentPage />
-        },
-      ]
+  // Manager
+  {
+    path: "/manager",
+    id: MANAGER_SESSION,
+    loader: async () => {
+      const session = secureLocalStorage.getItem(STORAGE_KEY) as DataSession | null;
+      if (!session || session.role !== "manager") {
+        throw redirect("/sign-in");
+      }
+      return session;
     },
-    {
-      path: "/student",
-      element: <LayoutDashboard isAdmin={false}/>,
-      children: [
-        {
-          index: true,
-          element: <StudentPage />
+    element: <LayoutDashboard isAdmin={true} />,
+    children: [
+      {
+        index: true,
+        element: <DashboardManagerPage />,
+      },
+      {
+        path: "/manager/courses",
+        loader: async () => {
+          const { data } = await getCourses();
+          return data;
         },
-        {
-          path: "/student/courses/:id",
-          element: <CoursePreview />
+        element: <ManagerCoursePage />,
+      },
+      {
+        path: "/manager/course/create",
+        loader: async () => {
+          const categories = await getCategories();
+          return { categories: categories.data };
         },
-      ]
+        element: <CreateCoursePage />,
+      },
+      {
+        path: "/manager/course/edit/:id",
+        loader: async ({ params }) => {
+          const categories = await getCategories();
+          const course = await getCourseDetailById(params.id as string);
+          return { categories: categories.data, course: course.data };
+        },
+        element: <UpdateCoursePage />,
+      },
+      {
+        path: "/manager/course/:id",
+        element: <CourseDetailPage />,
+      },
+      {
+        path: "/manager/courses/:id/create",
+        element: <CourseContentCreatePage />,
+      },
+      {
+        path: "/manager/courses/:id/preview",
+        element: <CoursePreview />,
+      },
+      {
+        path: "/manager/students",
+        element: <ManagerStudentsPage />,
+      },
+      {
+        path: "/manager/students/create",
+        element: <CreateStudentPage />,
+      },
+    ],
+  },
+  {
+    path: "/student",
+    loader: async () => {
+      const session = secureLocalStorage.getItem(STORAGE_KEY) as DataSession | null;
+      if (!session) {
+        throw redirect("/sign-in");
+      }
+      return session;
     },
-    {
-      path: "/manager/sign-in",
-      element: <SignIn />
-    },
-    {
-      path: "/manager/sign-up",
-      element: <SignUp />
-    },
-])
+    element: <LayoutDashboard isAdmin={false} />,
+    children: [
+      {
+        index: true,
+        element: <StudentPage />,
+      },
+      {
+        path: "/student/courses/:id",
+        element: <CoursePreview />,
+      },
+    ],
+  },
+]);
 
-export default router
+export default router;

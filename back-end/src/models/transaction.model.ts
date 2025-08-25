@@ -9,6 +9,10 @@ const transactionModel = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    email: {
+        type: String,
+        unique: true
+    },
     status: {
         type: String,
         enum: ['pending','success','failed'],
