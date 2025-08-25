@@ -1,7 +1,9 @@
 import { Link } from "react-router";
 import ContentItem from "./content-item";
+import type { courseContent } from "../../../types/course.type";
 
-function CourseContent() {
+function CourseContent({ data }: any) {
+  console.log(data);
   return (
     <section id="CourseList" className="flex flex-col w-full rounded-[30px] p-[30px] gap-[30px] bg-[#F8FAFB]">
       <div className="header flex items-center justify-between">
@@ -10,8 +12,14 @@ function CourseContent() {
           Add Content
         </Link>
       </div>
-      <ContentItem id={1} courseId={1} index={1} title="Belajar HTML" type="video" key={1} />
-      <ContentItem id={2} courseId={2} index={2} title="Belajar CSS" type="text" key={2} />
+      {data.length ? (
+        data.map((course: courseContent, idx: number) => {
+          return <ContentItem id={course._id} courseId={course._id} index={idx + 1} title={course.title} type={course.type} key={course._id} />;
+        })
+      ) : (
+        <div className="font-semibold text-center">Tidak ada Content</div>
+      )}
+
       <div id="Pagination" className="flex items-center gap-3">
         <button type="button" className="flex shrink-0 w-9 h-9 rounded-full items-center justify-center text-center transition-all duration-300 hover:bg-[#662FFF] hover:text-white hover:border-0 bg-[#662FFF] text-white">
           <span className="font-semibold text-sm leading-[21px]">1</span>

@@ -1,11 +1,11 @@
 import { Link } from "react-router";
 
 type PropsItem = {
-  id: number;
+  id: number | string;
   index: number;
   type: string;
   title: string;
-  courseId: number;
+  courseId: number | string;
 };
 
 function ContentItem({ id, index, type, title, courseId }: PropsItem) {
