@@ -19,6 +19,7 @@ export interface DataForm {
 }
 
 export interface courseDetail {
+  _id: string;
   category: {
     name: string;
   };

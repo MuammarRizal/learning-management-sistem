@@ -7,7 +7,6 @@ function CourseDetailPage() {
   const { id } = useParams();
   const data: courseDetail = useLoaderData();
   const courseContent = data.details;
-
   return (
     <>
       <div id="Breadcrumb" className="flex items-center gap-5 *:after:content-['/'] *:after:ml-5">
@@ -29,7 +28,7 @@ function CourseDetailPage() {
         </div>
       </header>
       <CourseInfo image={data.thumbnail} total_students={data.students.length} category={data.category.name} total_content={data.details.length} />
-      <CourseContent data={courseContent} />
+      <CourseContent paramsId={id} data={courseContent} />
     </>
   );
 }
