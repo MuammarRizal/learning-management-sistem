@@ -1,11 +1,9 @@
-import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ClassicEditor, Bold, Essentials, Heading, Indent, IndentBlock, Italic, Link, List, MediaEmbed, Paragraph, Table, Undo } from "ckeditor5";
-
 import "ckeditor5/ckeditor5.css";
 import { useForm } from "react-hook-form";
 import { createContentCourseSchema } from "../../../utils/zod.schema";
 import { useLoaderData } from "react-router";
+import TextEditor from "../../../components/TextEditor";
 
 function CourseContentCreatePage() {
   const { thumbnail, name } = useLoaderData();
@@ -13,13 +11,17 @@ function CourseContentCreatePage() {
     register,
     setValue,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(createContentCourseSchema),
   });
 
+  const type = watch("type");
+
   const onSubmitForm = (values: any) => {
     console.log(values);
+    console.log("heloRols");
   };
   return (
     <div>
@@ -68,30 +70,28 @@ function CourseContentCreatePage() {
                 Choose content type
               </option>
               <option value="video">Video</option>
-              <option value="text">text</option>
+              <option value="text">Text</option>
             </select>
             <img src="/assets/images/icons/arrow-down.svg" className="w-6 h-6" alt="icon" />
           </div>
-          {errors.type?.message && (
-            <div className="message-error">
-              <span className="error-message text-[#FF435A]">{errors.type?.message}</span>
-            </div>
-          )}
         </div>
-        <div className="flex flex-col gap-[10px]">
-          <label htmlFor="video" className="font-semibold">
-            Youtube Video ID
-          </label>
-          <div className="flex items-center w-full rounded-full border border-[#CFDBEF] gap-3 px-5 transition-all duration-300 focus-within:ring-2 focus-within:ring-[#662FFF]">
-            <img src="/assets/images/icons/bill-black.svg" className="w-6 h-6" alt="icon" />
-            <input {...register("youtubeId")} type="text" id="video" className="appearance-none outline-none w-full py-3 font-semibold placeholder:font-normal placeholder:text-[#838C9D] !bg-transparent" placeholder="Write tagline for better copy" />
-          </div>
-          {errors.youtubeId?.message && (
+        {type === "video" && (
+          <div className="flex flex-col gap-[10px]">
+            <label htmlFor="video" className="font-semibold">
+              Youtube Video ID
+            </label>
+            <div className="flex items-center w-full rounded-full border border-[#CFDBEF] gap-3 px-5 transition-all duration-300 focus-within:ring-2 focus-within:ring-[#662FFF]">
+              <img src="/assets/images/icons/bill-black.svg" className="w-6 h-6" alt="icon" />
+              <input {...register("youtubeId")} type="text" id="video" className="appearance-none outline-none w-full py-3 font-semibold placeholder:font-normal placeholder:text-[#838C9D] !bg-transparent" placeholder="Write tagline for better copy" />
+            </div>
+            {/* {errors.youtubeId?.message && (
             <div className="message-error">
               <span className="error-message text-[#FF435A]">{errors.youtubeId?.message}</span>
             </div>
-          )}
-        </div>
+          )} */}
+          </div>
+        )}
+
         {/* <div className="flex flex-col gap-[10px]">
                 <label htmlFor="desc" className="font-semibold">Description</label>
                 <div className="flex w-full rounded-[20px] border border-[#CFDBEF] gap-3 p-5  transition-all duration-300 focus-within:ring-2 focus-within:ring-[#662FFF] ring-2 ring-[#FF435A]">
@@ -100,26 +100,19 @@ function CourseContentCreatePage() {
                 </div>
                 <span className="error-message text-[#FF435A]">The description is required</span>
             </div> */}
-        <div className="flex flex-col gap-[10px]">
-          <label className="font-semibold">Content Text</label>
-          {/* <div id="editor">
+        {type === "text" && (
+          <div className="flex flex-col gap-[10px]">
+            <label className="font-semibold">Content Text</label>
+            {/* <div id="editor">
                 </div>*/}
-          <CKEditor
-            editor={ClassicEditor}
-            config={{
-              licenseKey: "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NTI4ODMxOTksImp0aSI6IjMwYjNkYzM0LTFjNjktNGIyNy04ODFkLTFmMTE2MTMzYTRlOCIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6IjUxYjRiYTM2In0.xFcJAEBmndC9GDjWVSKseCp7pL9Mtx_T6Z8PKJG3t2daI6Xun4Z1KaZiUEW1U335BvcIECCmKvqh_ld95fHcrw",
-              toolbar: ["undo", "redo", "|", "heading", "|", "bold", "italic", "|", "link", "insertTable", "mediaEmbed", "|", "bulletedList", "numberedList", "indent", "outdent"],
-              plugins: [Bold, Essentials, Heading, Indent, IndentBlock, Italic, Link, List, MediaEmbed, Paragraph, Table, Undo],
-              initialData: "<h1>Hello from CKEditor 5!</h1>",
-            }}
-            // onChange={(_, data) => console.log(data)}
-          />
-        </div>
-        {/* {errors.text?.message && (
+            <TextEditor />
+          </div>
+          /* {errors.text?.message && (
           <div className="message-error">
             <span className="error-message text-[#FF435A]">{errors.text?.message}</span>
           </div>
-        )} */}
+        )} */
+        )}
         <div className="flex items-center gap-[14px]">
           <button type="button" className="w-full rounded-full border border-[#060A23] p-[14px_20px] font-semibold text-nowrap">
             Save as Draft

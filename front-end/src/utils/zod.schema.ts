@@ -21,7 +21,7 @@ export const createCourseSchema = z.object({
 
 export const createContentCourseSchema = z.object({
   title: z.string().min(5),
-  type: z.string().min(5),
+  type: z.string(),
   courseId: z.string().min(5),
   text: z.string().min(10),
   youtubeId: z.any().refine((file) => file?.name, { message: "Thumbnail Is Required" }),
