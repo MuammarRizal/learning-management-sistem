@@ -24,3 +24,5 @@ export const updateCourses = async (id: string, data: DataForm) =>
     .then((res) => res.data);
 
 export const deleteCourseById = async (id: string) => apiInstanceAuth.delete(`/courses/${id}`).then((res) => res.data);
+
+export const createContentCourse = async (data: any) => apiInstanceAuth.post("/courses/contents", data).then((res) => res.data);

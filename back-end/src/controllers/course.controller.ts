@@ -6,7 +6,6 @@ import fs from "fs";
 import categoryModel from "../models/category.model";
 import userModel from "../models/user.model";
 import path from "path";
-import courseDetailModel from "../models/course-detail.model";
 export const getCourses = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const courses = await coursesModel
@@ -53,10 +52,19 @@ export const getCourseDetailById = async (
   try {
     const { id } = req.params;
     const { preview } = req.query;
-    const detailCourse = await coursesModel.findById(id).populate({
-      path: "details",
-      select: preview == "true" ? "title type youtubeId text" : "title type",
-    });
+
+    const imageUrl = process.env.WEB_APP_URL + "/uploads/courses/";
+
+    const detailCourse = await coursesModel
+      .findById(id)
+      .populate({
+        path: "category",
+        select: "name -_id",
+      })
+      .populate({
+        path: "details",
+        select: preview == "true" ? "title type youtubeId text" : "title type",
+      });
 
     if (!detailCourse) {
       return res.json({
@@ -65,7 +73,10 @@ export const getCourseDetailById = async (
     }
     return res.json({
       message: "Get Detail data Success",
-      data: detailCourse,
+      data: {
+        ...detailCourse.toObject(),
+        thumbnail: imageUrl + detailCourse.thumbnail,
+      },
     });
   } catch (error) {
     console.log("Internal server Error");

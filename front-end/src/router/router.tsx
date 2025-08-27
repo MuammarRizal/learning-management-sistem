@@ -91,10 +91,18 @@ const router = createBrowserRouter([
       },
       {
         path: "/manager/course/:id",
+        loader: async ({ params }) => {
+          const data = await getCourseDetailById(params.id as string);
+          return data.data;
+        },
         element: <CourseDetailPage />,
       },
       {
         path: "/manager/courses/:id/create",
+        loader: async ({ params }) => {
+          const data = await getCourseDetailById(params.id as string);
+          return data.data;
+        },
         element: <CourseContentCreatePage />,
       },
       {

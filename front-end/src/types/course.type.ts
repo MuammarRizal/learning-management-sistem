@@ -17,3 +17,30 @@ export interface DataForm {
   description: string;
   thumbnail?: File | string;
 }
+
+export interface courseDetail {
+  _id: string;
+  category: {
+    name: string;
+  };
+  description: string;
+  details: [];
+  manager: string;
+  name: string;
+  students: [];
+  tagline: string;
+  thumbnail?: File | string;
+}
+
+export interface courseInfo {
+  image?: File | string;
+  total_students: number;
+  category: string;
+  total_content: number;
+}
+
+export interface courseContent {
+  _id: string | number;
+  title: string;
+  type: string;
+}
