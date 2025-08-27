@@ -6,7 +6,6 @@ import fs from "fs";
 import categoryModel from "../models/category.model";
 import userModel from "../models/user.model";
 import path from "path";
-import courseDetailModel from "../models/course-detail.model";
 export const getCourses = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const courses = await coursesModel

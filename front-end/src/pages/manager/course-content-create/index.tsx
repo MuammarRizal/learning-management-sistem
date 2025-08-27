@@ -2,15 +2,26 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import "ckeditor5/ckeditor5.css";
 import { useForm } from "react-hook-form";
 import { createContentCourseSchema } from "../../../utils/zod.schema";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate, useParams } from "react-router";
 import TextEditor from "../../../components/TextEditor";
+import { useMutation } from "@tanstack/react-query";
+import { createContentCourse } from "../../../services/course.service";
 
 function CourseContentCreatePage() {
   const { thumbnail, name } = useLoaderData();
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const { isPending, mutateAsync } = useMutation({
+    mutationFn: (data) => createContentCourse(data),
+  });
+
   const {
     register,
     setValue,
     handleSubmit,
+
     watch,
     formState: { errors },
   } = useForm({
@@ -19,9 +30,16 @@ function CourseContentCreatePage() {
 
   const type = watch("type");
 
-  const onSubmitForm = (values: any) => {
-    console.log(values);
-    console.log("heloRols");
+  const onSubmitForm = async (values: any) => {
+    try {
+      await mutateAsync({
+        ...values,
+        courseId: id,
+      });
+      navigate(`/manager/course/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>
@@ -84,11 +102,11 @@ function CourseContentCreatePage() {
               <img src="/assets/images/icons/bill-black.svg" className="w-6 h-6" alt="icon" />
               <input {...register("youtubeId")} type="text" id="video" className="appearance-none outline-none w-full py-3 font-semibold placeholder:font-normal placeholder:text-[#838C9D] !bg-transparent" placeholder="Write tagline for better copy" />
             </div>
-            {/* {errors.youtubeId?.message && (
-            <div className="message-error">
-              <span className="error-message text-[#FF435A]">{errors.youtubeId?.message}</span>
-            </div>
-          )} */}
+            {errors.youtubeId?.message && (
+              <div className="message-error">
+                <span className="error-message text-[#FF435A]">{errors.youtubeId?.message}</span>
+              </div>
+            )}
           </div>
         )}
 
@@ -103,21 +121,20 @@ function CourseContentCreatePage() {
         {type === "text" && (
           <div className="flex flex-col gap-[10px]">
             <label className="font-semibold">Content Text</label>
-            {/* <div id="editor">
-                </div>*/}
-            <TextEditor />
+            <TextEditor valueText={setValue} />
+            {errors.text?.message && (
+              <div className="message-error">
+                <span className="error-message text-[#FF435A]">{errors.text?.message}</span>
+              </div>
+            )}
           </div>
-          /* {errors.text?.message && (
-          <div className="message-error">
-            <span className="error-message text-[#FF435A]">{errors.text?.message}</span>
-          </div>
-        )} */
         )}
+
         <div className="flex items-center gap-[14px]">
           <button type="button" className="w-full rounded-full border border-[#060A23] p-[14px_20px] font-semibold text-nowrap">
             Save as Draft
           </button>
-          <button type="submit" className="w-full rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap">
+          <button disabled={isPending} type="submit" className="w-full rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap">
             Add Content Now
           </button>
         </div>

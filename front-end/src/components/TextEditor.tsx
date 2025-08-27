@@ -1,10 +1,9 @@
-// Editor.tsx
 "use client";
 import { useEffect, useRef } from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 
-const TextEditor = () => {
+const TextEditor = ({ valueText }: any) => {
   const editorRef = useRef<HTMLDivElement | null>(null);
   const quillInstance = useRef<Quill | null>(null);
 
@@ -30,7 +29,7 @@ const TextEditor = () => {
       // Contoh ambil data dari editor
       quillInstance.current.on("text-change", () => {
         const content = quillInstance.current?.root.innerHTML;
-        console.log("Content:", content);
+        valueText("text", content);
       });
     }
   }, []);

@@ -19,13 +19,36 @@ export const createCourseSchema = z.object({
   thumbnail: z.any().refine((file) => file?.name, { message: "Thumbnail Is Required" }),
 });
 
-export const createContentCourseSchema = z.object({
-  title: z.string().min(5),
-  type: z.string(),
-  courseId: z.string().min(5),
-  text: z.string().min(10),
-  youtubeId: z.any().refine((file) => file?.name, { message: "Thumbnail Is Required" }),
-});
+export const createContentCourseSchema = z
+  .object({
+    title: z.string().min(5),
+    type: z.string(),
+    text: z.string().optional(),
+    youtubeId: z.string().optional(),
+  })
+  .superRefine((val, ctx) => {
+    const parseVideoId = z.string().min(4).safeParse(val.youtubeId);
+    const parseText = z.string().min(4).safeParse(val.text);
+    if (val.type === "video") {
+      if (!parseVideoId.success) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Youtube ID Required",
+          path: ["youtubeId"],
+        });
+      }
+    }
+
+    if (val.type === "text") {
+      if (!parseText.success) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Content Text Required",
+          path: ["text"],
+        });
+      }
+    }
+  });
 
 export const updateCourseSchema = z.object({
   name: z.string().min(5),
